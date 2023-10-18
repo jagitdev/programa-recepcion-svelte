@@ -1,6 +1,11 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   // En tu componente Svelte
   let habitaciones: any = [];
+  let habitacionesUno: any = [];
+  let habitacionesDos: any = [];
+  let habitacionesTres: any = [];
 
   // Esta función realiza una solicitud GET a la API Spring
   async function obtenerHabitaciones() {
@@ -10,7 +15,27 @@
       if (response.ok) {
         const data = await response.json();
         habitaciones = data;
+
+        //Dividimos el array principal en tres arrays
+        //101-106
+        habitacionesUno = habitaciones.filter(
+          (h: { numHabitacion: number }) =>
+            h.numHabitacion >= 101 && h.numHabitacion <= 106
+        );
+
+        //201-206
+        habitacionesDos = habitaciones.filter(
+          (h: { numHabitacion: number }) =>
+            h.numHabitacion >= 201 && h.numHabitacion <= 206
+        );
+        //301-306
+        habitacionesTres = habitaciones.filter(
+          (h: { numHabitacion: number }) =>
+            h.numHabitacion >= 301 && h.numHabitacion <= 306
+        );
+
         console.log(habitaciones);
+        console.log(habitacionesUno);
       } else {
         console.error("Error al obtener las habitaciones:", response.status);
       }
@@ -20,33 +45,31 @@
   }
 
   // Llamar a la función para obtener las habitaciones cuando sea necesario
-  obtenerHabitaciones();
+  onMount(obtenerHabitaciones);
 </script>
 
 <div class="quadrate">
   <div class="info-container">
     <div class="container-uno">
-      {#each habitaciones as habitacion (habitacion.id)}
-        <div class={habitacion.estado === "libre" ? "libre" : "ocupado"}>
-          <p>{habitacion.numeroHabitacion}</p>
+      {#each habitacionesUno as habitacion (habitacion.id)}
+        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
+          <p>{habitacion.numHabitacion}</p>
         </div>
       {/each}
     </div>
     <div class="container-dos">
-      <div class="uno" />
-      <div class="dos" />
-      <div class="tres" />
-      <div class="cuadro" />
-      <div class="cinco" />
-      <div class="seis" />
+      {#each habitacionesDos as habitacion (habitacion.id)}
+        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
+          <p>{habitacion.numHabitacion}</p>
+        </div>
+      {/each}
     </div>
     <div class="container-tres">
-      <div class="uno" />
-      <div class="dos" />
-      <div class="tres" />
-      <div class="cuadro" />
-      <div class="cinco" />
-      <div class="seis" />
+      {#each habitacionesTres as habitacion (habitacion.id)}
+        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
+          <p>{habitacion.numHabitacion}</p>
+        </div>
+      {/each}
     </div>
   </div>
 </div>
@@ -62,7 +85,7 @@
       position: absolute;
       left: 15rem;
       right: 15rem;
-      top: 10rem;
+      top: 8rem;
 
       .container-uno {
         display: grid;
@@ -73,10 +96,16 @@
 
         .libre {
           background-color: #0d5f00;
+          box-shadow: 0px 0px 10px 0px #0d5f00;
+          -webkit-box-shadow: 0px 0px 10px 0px #0d5f00;
+          -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
         }
 
         .ocupado {
           background-color: #820000;
+          box-shadow: 0px 0px 10px 0px #820000;
+          -webkit-box-shadow: 0px 0px 10px 0px #820000;
+          -moz-box-shadow: 0px 0px 10px 0px #820000;
         }
 
         div {
@@ -124,9 +153,30 @@
         height: 26%;
         margin-top: 5%;
 
+        .libre {
+          background-color: #0d5f00;
+          box-shadow: 0px 0px 10px 0px #0d5f00;
+          -webkit-box-shadow: 0px 0px 10px 0px #0d5f00;
+          -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
+        }
+
+        .ocupado {
+          background-color: #820000;
+          box-shadow: 0px 0px 10px 0px #820000;
+          -webkit-box-shadow: 0px 0px 10px 0px #820000;
+          -moz-box-shadow: 0px 0px 10px 0px #820000;
+        }
+
         div {
           background-color: #0d5f00;
           border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          p {
+            font-size: 30px;
+          }
         }
 
         .uno {
@@ -162,9 +212,30 @@
         height: 26%;
         margin-top: 5%;
 
+        .libre {
+          background-color: #0d5f00;
+          box-shadow: 0px 0px 10px 0px #0d5f00;
+          -webkit-box-shadow: 0px 0px 10px 0px #0d5f00;
+          -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
+        }
+
+        .ocupado {
+          background-color: #820000;
+          box-shadow: 0px 0px 10px 0px #820000;
+          -webkit-box-shadow: 0px 0px 10px 0px #820000;
+          -moz-box-shadow: 0px 0px 10px 0px #820000;
+        }
+
         div {
           background-color: #0d5f00;
           border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          p {
+            font-size: 30px;
+          }
         }
 
         .uno {
