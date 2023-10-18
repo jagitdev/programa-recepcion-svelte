@@ -1,7 +1,6 @@
 <script lang="ts">
   import Modal from "$lib/components/modal/modal.svelte";
   import { onMount } from "svelte";
-  import ContentModalConfiguration from "./ContentModalConfiguration.svelte";
   import { storeShowModal } from "$lib/components/stores/store";
 
   // En tu componente Svelte
