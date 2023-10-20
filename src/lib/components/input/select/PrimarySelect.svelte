@@ -1,79 +1,49 @@
+<script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
+  type SelectArrowType = {
+    value: any;
+    text: any;
+  }[];
+
+  export let values: any;
+  export let valuesSelect: SelectArrowType = [];
+
+  const dispatch = createEventDispatcher();
+
+  function handleChange(event: any) {
+    const selectedValue = event.target.value;
+
+    dispatch("selected", selectedValue);
+  }
+</script>
+
 <div class="custom-select">
-  <select>
-    <option value="0">Select car:</option>
-    <option value="1">Audi</option>
-    <option value="2">BMW</option>
-    <option value="3">Citroen</option>
-    <option value="4">Ford</option>
-    <option value="5">Honda</option>
-    <option value="6">Jaguar</option>
-    <option value="7">Land Rover</option>
-    <option value="8">Mercedes</option>
-    <option value="9">Mini</option>
-    <option value="10">Nissan</option>
-    <option value="11">Toyota</option>
-    <option value="12">Volvo</option>
+  <select
+    name="select"
+    class="select"
+    bind:value={values}
+    on:change={handleChange}
+  >
+    {#each valuesSelect as service}
+      <option value={service.text}>
+        {service.text}
+      </option>
+    {/each}
   </select>
 </div>
 
 <style lang="scss">
-  .custom-select {
-    position: relative;
-    font-family: Arial;
-  }
-
-  .custom-select select {
-    display: none; /*hide original SELECT element: */
-    .select-selected {
-      background-color: DodgerBlue;
-    }
-
-    /* Style the arrow inside the select element: */
-    .select-selected:after {
-      position: absolute;
-      content: "";
-      top: 14px;
-      right: 10px;
-      width: 0;
-      height: 0;
-      border: 6px solid transparent;
-      border-color: #fff transparent transparent transparent;
-    }
-
-    /* Point the arrow upwards when the select box is open (active): */
-    .select-selected.select-arrow-active:after {
-      border-color: transparent transparent #fff transparent;
-      top: 7px;
-    }
-
-    /* style the items (options), including the selected item: */
-    .select-items div,
-    .select-selected {
-      color: #ffffff;
-      padding: 8px 16px;
-      border: 1px solid transparent;
-      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-      cursor: pointer;
-    }
-
-    /* Style items (options): */
-    .select-items {
-      position: absolute;
-      background-color: DodgerBlue;
-      top: 100%;
-      left: 0;
-      right: 0;
-      z-index: 99;
-    }
-
-    /* Hide the items when the select box is closed: */
-    .select-hide {
-      display: none;
-    }
-
-    .select-items div:hover,
-    .same-as-selected {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
+  select {
+    width: 22rem;
+    height: 100%;
+    padding: 10px;
+    border: 2px solid #3d3d3d;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #7a7a7a;
+    font-size: 16px;
+    font-weight: 600;
   }
 </style>

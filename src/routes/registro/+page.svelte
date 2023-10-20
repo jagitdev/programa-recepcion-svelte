@@ -1,13 +1,18 @@
 <script lang="ts">
   import Head from "$lib/components/structure/head/Head.svelte";
   import ContainerFormRegister from "./(components)/ContainerFormRegister.svelte";
+  import InfoClientsRegister from "./(components)/InfoClientsRegister.svelte";
   import ViewRoomsRegister from "./(components)/ViewRoomsRegister.svelte";
+
+  let listHabitaciones: any = [];
 </script>
 
 <Head text="Registro Cliente" />
 <div class="container-main">
   <div class="container-left">
-    <div class="container-info-client" />
+    <div class="container-info-client">
+      <InfoClientsRegister />
+    </div>
     <div class="container-form">
       <ContainerFormRegister />
     </div>
@@ -33,9 +38,12 @@
 
       .container-info-client {
         height: 5rem;
-        width: 70%;
+        width: 60%;
         position: absolute;
         margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .container-form {

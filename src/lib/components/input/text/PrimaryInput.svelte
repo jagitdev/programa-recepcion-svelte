@@ -1,4 +1,9 @@
-<input type="text" placeholder="Nombre" class="form__input" id="nombre" />
+<script lang="ts">
+  export let value = "";
+  export let placeholder = "falta placeholder";
+</script>
+
+<input type="text" {placeholder} class="form__input" id="nombre" bind:value />
 
 <style lang="scss">
   input {
