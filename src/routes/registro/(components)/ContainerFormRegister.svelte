@@ -46,10 +46,10 @@
   ];
 
   let valuesSelectNumCamas = [
-    { value: 1, text: "1" },
-    { value: 2, text: "2" },
-    { value: 3, text: "3" },
-    { value: 4, text: "4" },
+    { value: 1, text: "Camas 1" },
+    { value: 2, text: "Camas 2" },
+    { value: 3, text: "Camas 3" },
+    { value: 4, text: "Camas 4" },
   ];
 
   let valuesSelectFumador = [
@@ -167,29 +167,22 @@
       bind:value={createCliente.fechaFinalizacion}
     />
   </TwoDiv>
-
-  <TwoDiv>
-    <PrimarySelect
-      slot="one"
-      valuesSelect={valuesSelectNumCamas}
-      bind:values={selectedValuesNumCamas}
-      on:selected={handleSelectedValuesNumCamas}
-    />
-    <PrimarySelect
-      slot="two"
-      valuesSelect={valuesSelectMascota}
-      bind:values={selectedValuesMascota}
-      on:selected={handleSelectedValuesMascota}
-    />
-  </TwoDiv>
-  <TwoDiv>
-    <PrimarySelect
-      slot="one"
-      valuesSelect={valuesSelectFumador}
-      bind:values={selectedValuesFumador}
-      on:selected={handleSelectedValuesFumador}
-    />
-  </TwoDiv>
+  {#if $listClients.length == 0}
+    <TwoDiv>
+      <PrimarySelect
+        slot="one"
+        valuesSelect={valuesSelectFumador}
+        bind:values={selectedValuesFumador}
+        on:selected={handleSelectedValuesFumador}
+      />
+      <PrimarySelect
+        slot="two"
+        valuesSelect={valuesSelectMascota}
+        bind:values={selectedValuesMascota}
+        on:selected={handleSelectedValuesMascota}
+      />
+    </TwoDiv>
+  {/if}
 
   <div class="one">
     <SecondButton on:click={newCreateClient}>Aceptar</SecondButton>

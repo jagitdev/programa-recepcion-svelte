@@ -1,5 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import Modal from "$lib/components/modal/modal.svelte";
+  import InfoClientsEliminate from "./modal/InfoClientsEliminate.svelte";
+  import { datosHabitacion } from "$lib/components/stores/store";
 
   // En tu componente Svelte
   let habitaciones: any = [];
@@ -8,7 +11,7 @@
   let habitacionesTres: any = [];
 
   // Esta función realiza una solicitud GET a la API Spring
-  async function obtenerHabitaciones() {
+  async function obtenerTodasHabitaciones() {
     try {
       const response = await fetch("http://localhost:8080/api/v1/habitaciones");
 
@@ -44,33 +47,88 @@
     }
   }
 
-  // Llamar a la función para obtener las habitaciones cuando sea necesario
-  onMount(obtenerHabitaciones);
+  // Llamar a la función para obtener las habitaciones
+  onMount(obtenerTodasHabitaciones);
 </script>
 
 <div class="quadrate">
   <div class="info-container">
-    <div class="container-uno">
-      {#each habitacionesUno as habitacion (habitacion.id)}
-        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
-          <p>{habitacion.numHabitacion}</p>
-        </div>
-      {/each}
-    </div>
-    <div class="container-dos">
-      {#each habitacionesDos as habitacion (habitacion.id)}
-        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
-          <p>{habitacion.numHabitacion}</p>
-        </div>
-      {/each}
-    </div>
-    <div class="container-tres">
-      {#each habitacionesTres as habitacion (habitacion.id)}
-        <div class={habitacion.ocupacion === "libre" ? "libre" : "ocupado"}>
-          <p>{habitacion.numHabitacion}</p>
-        </div>
-      {/each}
-    </div>
+    {#if habitaciones == false}
+      <h1>No Hay Datos</h1>
+    {:else}
+      <div class="container-uno">
+        {#each habitacionesUno as habitacion (habitacion.id)}
+          {#if habitacion.ocupacion === "libre"}
+            <div class="libre">
+              <p>{habitacion.numHabitacion}</p>
+            </div>
+          {:else}
+            <a href={"/habitacion"}>
+              <div
+                class="ocupado"
+                on:click={() => {
+                  console.log(
+                    "Habitacion pulsada: " + habitacion.numHabitacion
+                  );
+                  datosHabitacion.set(habitacion);
+                  console.log("$ " + datosHabitacion);
+                }}
+              >
+                <p>{habitacion.numHabitacion}</p>
+              </div>
+            </a>
+          {/if}
+        {/each}
+      </div>
+      <div class="container-dos">
+        {#each habitacionesDos as habitacion (habitacion.id)}
+          {#if habitacion.ocupacion === "libre"}
+            <div class="libre">
+              <p>{habitacion.numHabitacion}</p>
+            </div>
+          {:else}
+            <a href={"/habitacion"}>
+              <div
+                class="ocupado"
+                on:click={() => {
+                  console.log(
+                    "Habitacion pulsada: " + habitacion.numHabitacion
+                  );
+                  datosHabitacion.set(habitacion);
+                  console.log("$ " + datosHabitacion);
+                }}
+              >
+                <p>{habitacion.numHabitacion}</p>
+              </div>
+            </a>
+          {/if}
+        {/each}
+      </div>
+      <div class="container-tres">
+        {#each habitacionesTres as habitacion (habitacion.id)}
+          {#if habitacion.ocupacion === "libre"}
+            <div class="libre">
+              <p>{habitacion.numHabitacion}</p>
+            </div>
+          {:else}
+            <a href={"/habitacion"}>
+              <div
+                class="ocupado"
+                on:click={() => {
+                  console.log(
+                    "Habitacion pulsada: " + habitacion.numHabitacion
+                  );
+                  datosHabitacion.set(habitacion);
+                  console.log("$ " + datosHabitacion);
+                }}
+              >
+                <p>{habitacion.numHabitacion}</p>
+              </div>
+            </a>
+          {/if}
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -87,6 +145,10 @@
       right: 15rem;
       top: 8rem;
 
+      h1 {
+        text-align: center;
+      }
+
       .container-uno {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
@@ -101,11 +163,17 @@
           -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
         }
 
+        a {
+          text-decoration: none;
+          color: #b3b3b3;
+        }
         .ocupado {
           background-color: #820000;
           box-shadow: 0px 0px 10px 0px #820000;
           -webkit-box-shadow: 0px 0px 10px 0px #820000;
           -moz-box-shadow: 0px 0px 10px 0px #820000;
+          cursor: pointer;
+          height: 100%;
         }
 
         div {
@@ -160,11 +228,17 @@
           -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
         }
 
+        a {
+          text-decoration: none;
+          color: #b3b3b3;
+        }
         .ocupado {
           background-color: #820000;
           box-shadow: 0px 0px 10px 0px #820000;
           -webkit-box-shadow: 0px 0px 10px 0px #820000;
           -moz-box-shadow: 0px 0px 10px 0px #820000;
+          cursor: pointer;
+          height: 100%;
         }
 
         div {
@@ -219,11 +293,18 @@
           -moz-box-shadow: 0px 0px 10px 0px #0d5f00;
         }
 
+        a {
+          text-decoration: none;
+          color: #b3b3b3;
+        }
+
         .ocupado {
           background-color: #820000;
           box-shadow: 0px 0px 10px 0px #820000;
           -webkit-box-shadow: 0px 0px 10px 0px #820000;
           -moz-box-shadow: 0px 0px 10px 0px #820000;
+          cursor: pointer;
+          height: 100%;
         }
 
         div {

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Modal from "$lib/components/modal/modal.svelte";
   import { onMount } from "svelte";
-  import { storeShowModal } from "$lib/components/stores/store";
+  import ContentModalConfiguration from "./ContentModalConfiguration.svelte";
 
   // En tu componente Svelte
   let habitaciones: any = [];
@@ -23,11 +23,6 @@
 
   onMount(obtenerHabitaciones);
 
-  //si cambia el estado de storeShowModal volvera a llamar a la api
-  $: if (!$storeShowModal) {
-    obtenerHabitaciones();
-  }
-
   let showModal = false;
   let modalContent;
   let Data: any;
@@ -37,7 +32,6 @@
     showModal = true;
     modalContent = component;
     Data = data;
-    storeShowModal.update((n) => (n = true));
   }
 </script>
 
@@ -54,7 +48,7 @@
   </thead>
   <tbody>
     {#if showModal}
-      <Modal bind:showModal {Data} />
+      <Modal bind:showModal {Data}><ContentModalConfiguration {Data} /></Modal>
     {/if}
 
     {#each habitaciones as habitacion (habitacion.id)}

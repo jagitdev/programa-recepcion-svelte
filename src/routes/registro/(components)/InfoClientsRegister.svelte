@@ -16,11 +16,20 @@
     max-width: 150px;
     min-width: 70px;
     margin-left: 10px;
+    animation: fade 0.5s ease-out;
 
     p {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 </style>

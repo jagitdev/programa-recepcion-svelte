@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { storeShowModal } from "$lib/components/stores/store";
-  import ContentModalConfiguration from "../../../routes/configuracion/(components)/ContentModalConfiguration.svelte";
   import SecondButton from "../buttons/SecondButton.svelte";
 
   export let showModal: any; // boolean
@@ -24,11 +22,10 @@
 >
   <div class="wrapper">
     <p>Habitación {Data.numHabitacion}</p>
-    <ContentModalConfiguration {Data} />
+    <slot />
     <div class="wrapper-button">
       <SecondButton
         on:click={() => {
-          storeShowModal.update((n) => (n = false));
           showModal = false;
         }}>Aceptar</SecondButton
       >
@@ -39,7 +36,7 @@
 <style lang="scss">
   dialog {
     max-width: 60rem;
-    max-height: 30rem;
+    max-height: 40rem;
     border-radius: 10px;
     border: none;
     padding: 0;
@@ -63,11 +60,9 @@
       align-items: center;
     }
   }
-  dialog::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-  }
+
   dialog > dialog[open] {
-    animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 0.2);
   }
   @keyframes zoom {
     from {
@@ -79,6 +74,7 @@
   }
   dialog[open]::backdrop {
     animation: fade 0.2s ease-out;
+    background: rgba(0, 0, 0, 0.4);
   }
   @keyframes fade {
     from {

@@ -2,4 +2,4 @@
   export let Data: any;
 </script>
 
-<p>{Data.numCamas}</p>
+<p>{Data.id}</p>
