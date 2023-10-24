@@ -115,12 +115,12 @@
     <TwoDiv>
       <PrimaryInput
         slot="one"
-        placeholder={"Fecha de Llegada"}
+        placeholder={"Fecha de Llegada (yyyy-mm-dd)"}
         bind:value={createCliente.fechaLlegada}
       />
       <PrimaryInput
         slot="two"
-        placeholder={"Fecha de Salida"}
+        placeholder={"Fecha de Salida (yyyy-mm-dd)"}
         bind:value={createCliente.fechaFinalizacion}
       />
     </TwoDiv>

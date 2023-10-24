@@ -1,13 +1,16 @@
 <script lang="ts">
   import Head from "$lib/components/structure/head/Head.svelte";
   import ContainerFormCheckIn from "./(components)/ContainerFormCheckIn.svelte";
+  import InfoClientCheckIn from "./(components)/InfoClientCheckIn.svelte";
   import ViewRoomsCheckIn from "./(components)/ViewRoomsCheckIn.svelte";
 </script>
 
 <Head text="Check-in" />
 <div class="container-main">
   <div class="container-left">
-    <div class="container-info-client" />
+    <div class="container-info-client">
+      <InfoClientCheckIn />
+    </div>
     <div class="container-form">
       <ContainerFormCheckIn />
     </div>
@@ -33,9 +36,12 @@
 
       .container-info-client {
         height: 5rem;
-        width: 70%;
+        width: 60%;
         position: absolute;
         margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .container-form {

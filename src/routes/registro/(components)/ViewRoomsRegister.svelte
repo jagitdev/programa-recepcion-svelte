@@ -40,6 +40,7 @@
     console.log(habitacion);
     let listClientss = $listClients;
     console.log(listClientss);
+
     async function crearClienteFumadorMascota(
       listClients: any[],
       numHabitacion: any

@@ -1,44 +1,13 @@
 <script lang="ts">
   import SecondButton from "$lib/components/buttons/SecondButton.svelte";
   import PrimaryInput from "$lib/components/input/text/PrimaryInput.svelte";
+  import {
+    datosReserva,
+    listClientsCheckIn,
+  } from "$lib/components/stores/store";
 
   import OneDiv from "$lib/components/structure/div/OneDiv.svelte";
   import TwoDiv from "$lib/components/structure/div/TwoDiv.svelte";
-
-  //crear cliente ---------------------------
-  type typeCreateClient = {
-    nombre: string;
-    apellidoUno: string;
-    apellidoDos: string;
-    dni: string;
-    telefono: string;
-    correoElectronico: string;
-    direccion: string;
-    fechaLlegada: string;
-    fechaFinalizacion: string;
-  };
-
-  let createCliente: typeCreateClient = {
-    nombre: "",
-    apellidoUno: "",
-    apellidoDos: "",
-    dni: "",
-    telefono: "",
-    correoElectronico: "",
-    direccion: "",
-    fechaLlegada: "",
-    fechaFinalizacion: "",
-  };
-
-  createCliente.nombre = "";
-  createCliente.apellidoUno = "";
-  createCliente.apellidoDos = "";
-  createCliente.dni = "";
-  createCliente.telefono = "";
-  createCliente.correoElectronico = "";
-  createCliente.direccion = "";
-
-  //-----------------------------------------
 
   // llamada para buscar la reserva ----------------------
   function buscarReservas(reservaData: any) {
@@ -76,9 +45,68 @@
     obtenerHabitacionesFumadorMascota(reservaData.dni);
   }
 
+  console.log($datosReserva);
+  buscarReservas($datosReserva);
   //-------------------------------------------
 
+  //crear cliente ---------------------------
+  type typeCreateClient = {
+    nombre: string;
+    apellidoUno: string;
+    apellidoDos: string;
+    dni: string;
+    telefono: string;
+    correoElectronico: string;
+    direccion: string;
+    fechaLlegada: string;
+    fechaFinalizacion: string;
+  };
+
+  let createCliente: typeCreateClient = {
+    nombre: "",
+    apellidoUno: "",
+    apellidoDos: "",
+    dni: "",
+    telefono: "",
+    correoElectronico: "",
+    direccion: "",
+    fechaLlegada: "",
+    fechaFinalizacion: "",
+  };
+
+  //----------------------------
+
   //llamada para crear el cliente ---------------------------
+
+  function nuevoCliente() {
+    let newClient: typeCreateClient = {
+      nombre: createCliente.nombre,
+      apellidoUno: createCliente.apellidoUno,
+      apellidoDos: createCliente.apellidoDos,
+      dni: createCliente.dni,
+      telefono: createCliente.telefono,
+      correoElectronico: createCliente.correoElectronico,
+      direccion: createCliente.direccion,
+      fechaLlegada: $datosReserva.fechaLlegada,
+      fechaFinalizacion: $datosReserva.fechaFinalizacion,
+    };
+
+    createCliente.nombre = "";
+    createCliente.apellidoUno = "";
+    createCliente.apellidoDos = "";
+    createCliente.dni = "";
+    createCliente.telefono = "";
+    createCliente.correoElectronico = "";
+    createCliente.direccion = "";
+
+    console.log(newClient);
+
+    listClientsCheckIn.update(
+      (clients: any) => (clients = [...clients, newClient])
+    );
+
+    console.log($listClientsCheckIn);
+  }
 
   //----------------------------------------------------------
 </script>
@@ -119,7 +147,7 @@
   />
 </OneDiv>
 <div class="one">
-  <SecondButton>Aceptar</SecondButton>
+  <SecondButton on:click={nuevoCliente}>Aceptar</SecondButton>
 </div>
 
 <style lang="scss">

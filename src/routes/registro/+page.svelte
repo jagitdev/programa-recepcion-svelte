@@ -3,8 +3,6 @@
   import ContainerFormRegister from "./(components)/ContainerFormRegister.svelte";
   import InfoClientsRegister from "./(components)/InfoClientsRegister.svelte";
   import ViewRoomsRegister from "./(components)/ViewRoomsRegister.svelte";
-
-  let listHabitaciones: any = [];
 </script>
 
 <Head text="Registro Cliente" />

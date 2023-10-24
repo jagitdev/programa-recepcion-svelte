@@ -59,8 +59,8 @@
   }
 
   function actulizarHabitacionBorrarClientes(datos: any) {
-    actualizarHabitacionId(datos);
-    eliminarClientes(datos.numHabitacion);
+    actualizarHabitacionId($datosHabitacion);
+    eliminarClientes($datosHabitacion.numHabitacion);
   }
 
   let clientes: any = [];
@@ -82,7 +82,7 @@
     }
   }
 
-  obtenerClientesHabitacion(datos.numHabitacion);
+  obtenerClientesHabitacion($datosHabitacion.numHabitacion);
 </script>
 
 <div class="container">

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { listClients } from "$lib/components/stores/store";
+  import { listClientsCheckIn } from "$lib/components/stores/store";
 </script>
 
-{#each $listClients as client}
+{#each $listClientsCheckIn as client}
   <div class="container-data">
     <p>{client.nombre} {client.apellidoUno} {client.apellidoDos}</p>
   </div>

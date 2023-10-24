@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { datosReserva, idHabitacion } from "$lib/components/stores/store";
   import { onMount } from "svelte";
 
   // En tu componente Svelte
@@ -22,8 +23,42 @@
 
   onMount(obtenerReservas);
 
-  function handleClick() {
+  function handleClick(reserva: any) {
     goto("/checkin");
+    console.log("reserva: " + reserva.numHabitacion);
+
+    datosReserva.update((n: any) => (n = reserva));
+
+    async function habitacionNumHabitacion(numHabitacion: any) {
+      try {
+        // Construye la URL para la creación de una nueva habitación
+        const URL = `http://localhost:8080/api/v1/habitaciones?numHabitacion=${numHabitacion}`;
+
+        // Define los datos que deseas enviar en el cuerpo de la solicitud POST
+
+        // Realiza una solicitud POST utilizando fetch
+        const response = await fetch(URL, {
+          method: "GET",
+        });
+
+        if (response.ok) {
+          // Si la respuesta es exitosa, puedes procesar la respuesta si es necesario
+          let data = await response.json();
+
+          $idHabitacion = data.id;
+
+          console.log("habitación actualizar: " + $idHabitacion);
+        } else {
+          // Si la respuesta no es exitosa, muestra un mensaje de error
+          console.error("Error al obtener habitacion:", response.status);
+        }
+      } catch (error) {
+        // Maneja errores de red u otros errores que puedan ocurrir durante la solicitud
+        console.error("Error de red al obtener habitacion:", error);
+      }
+    }
+
+    habitacionNumHabitacion(reserva.numHabitacion);
   }
 </script>
 
@@ -41,7 +76,7 @@
   </thead>
   <tbody>
     {#each reservas as reserva}
-      <tr on:click={handleClick}>
+      <tr on:click={() => handleClick(reserva)}>
         <td>{reserva.numHabitacion}</td>
         <td>{reserva.nombre}</td>
         <td>{reserva.apellidoUno}</td>
