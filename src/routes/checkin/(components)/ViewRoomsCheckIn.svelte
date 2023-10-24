@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <div class="container-room">
   <div class="container-text">
     <p>Habitación asignada</p>
@@ -23,6 +26,18 @@
         font-size: 25px;
         font-weight: 600;
         text-align: center;
+      }
+    }
+
+    .container-data {
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      p {
+        font-size: 20px;
+        font-weight: 500;
       }
     }
   }

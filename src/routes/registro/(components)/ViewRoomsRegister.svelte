@@ -40,7 +40,7 @@
     console.log(habitacion);
     let listClientss = $listClients;
     console.log(listClientss);
-    async function crearHabitacionFumadorMascota(
+    async function crearClienteFumadorMascota(
       listClients: any[],
       numHabitacion: any
     ) {
@@ -120,7 +120,7 @@
       }
     }
 
-    crearHabitacionFumadorMascota(listClientss, habitacion.numHabitacion);
+    crearClienteFumadorMascota(listClientss, habitacion.numHabitacion);
     actualizarHabitacionId(habitacion);
     $listClients = [];
   }

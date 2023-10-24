@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { obtenerHabitacionesFumadorMascota } from "$lib/components/api/obtenerHabitacionesFumadorMascota";
   import SecondButton from "$lib/components/buttons/SecondButton.svelte";
   import PrimarySelect from "$lib/components/input/select/PrimarySelect.svelte";
   import PrimaryInput from "$lib/components/input/text/PrimaryInput.svelte";
@@ -45,28 +44,16 @@
     { value: 1, text: "Permite Mascota" },
   ];
 
-  let valuesSelectNumCamas = [
-    { value: 1, text: "Camas 1" },
-    { value: 2, text: "Camas 2" },
-    { value: 3, text: "Camas 3" },
-    { value: 4, text: "Camas 4" },
-  ];
-
   let valuesSelectFumador = [
     { value: 0, text: "No permite Fumador" },
     { value: 1, text: "Permite Fumador" },
   ];
 
   let selectedValuesMascota: string = "Permite Mascota";
-  let selectedValuesNumCamas: string = "1";
   let selectedValuesFumador: string = "Permite Fumador";
 
   function handleSelectedValuesMascota(event: any) {
     selectedValuesMascota = event.detail;
-  }
-
-  function handleSelectedValuesNumCamas(event: any) {
-    selectedValuesNumCamas = event.detail;
   }
 
   function handleSelectedValuesFumador(event: any) {

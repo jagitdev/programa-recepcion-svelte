@@ -35,7 +35,7 @@
 
 <style lang="scss">
   select {
-    width: 22rem;
+    width: 21.5rem;
     height: 100%;
     padding: 10px;
     border: 2px solid #3d3d3d;

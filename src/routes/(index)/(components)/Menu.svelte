@@ -21,7 +21,7 @@
     <div class="icons-botons">
       <Icon icon="settings" color="B3B3B3" link="configuracion" />
       <Icon icon="toc" color="B3B3B3" link="historico" />
-      <Icon icon="flip" color="B3B3B3" link="check-in" />
+      <Icon icon="flip" color="B3B3B3" link="reservas" />
     </div>
     <hr class="vertical-line-dos" />
     <div class="plantas">
