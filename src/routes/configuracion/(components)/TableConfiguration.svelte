@@ -1,7 +1,5 @@
 <script lang="ts">
-  import Modal from "$lib/components/modal/modal.svelte";
   import { onMount } from "svelte";
-  import ContentModalConfiguration from "./ContentModalConfiguration.svelte";
 
   // En tu componente Svelte
   let habitaciones: any = [];
@@ -47,12 +45,8 @@
     </tr>
   </thead>
   <tbody>
-    {#if showModal}
-      <Modal bind:showModal {Data}><ContentModalConfiguration {Data} /></Modal>
-    {/if}
-
     {#each habitaciones as habitacion (habitacion.id)}
-      <tr on:click={() => handleRowClick(habitacion.id, Modal, habitacion)}>
+      <tr>
         <td>{habitacion.numHabitacion}</td>
         <td>{habitacion.precio}</td>
         <td

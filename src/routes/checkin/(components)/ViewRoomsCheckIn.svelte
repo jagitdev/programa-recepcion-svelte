@@ -49,6 +49,7 @@
     }
   }
 
+
   async function actualizarHabitacionId(id: any) {
     try {
       // Construye la URL para la creación de una nueva habitación
