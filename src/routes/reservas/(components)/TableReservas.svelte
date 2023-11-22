@@ -34,8 +34,6 @@
         // Construye la URL para la creación de una nueva habitación
         const URL = `http://localhost:8080/api/v1/habitaciones?numHabitacion=${numHabitacion}`;
 
-        // Define los datos que deseas enviar en el cuerpo de la solicitud POST
-
         // Realiza una solicitud POST utilizando fetch
         const response = await fetch(URL, {
           method: "GET",

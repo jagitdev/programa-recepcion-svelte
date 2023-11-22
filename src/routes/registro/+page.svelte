@@ -27,7 +27,7 @@
     margin-inline: 8rem;
 
     .container-left {
-      height: 50rem;
+      height: 49rem;
       width: 75%;
       margin-right: 5rem;
       display: flex;
@@ -45,7 +45,7 @@
       }
 
       .container-form {
-        height: 45rem;
+        height: 44rem;
         width: 60%;
         margin-top: 5rem;
         position: relative;
@@ -54,7 +54,7 @@
 
     .container-view-room {
       width: 25%;
-      height: 50rem;
+      height: 49rem;
     }
   }
 </style>
