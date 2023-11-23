@@ -6,6 +6,8 @@
     valueMascota,
   } from "$lib/components/stores/store";
 
+  let textoHabitacionesDisponibles = "Habitaciones Disponibles";
+
   let habitaciones: any = [];
   async function obtenerHabitacionesFumadorMascota(
     fumador: any,
@@ -81,6 +83,8 @@
       // Maneja errores de red u otros errores que puedan ocurrir durante la solicitud
       console.error("Error de red al crear la reserva:", error);
     }
+
+    textoHabitacionesDisponibles = "Habitación asignada correctamente";
   }
 </script>
 
@@ -95,7 +99,7 @@
     </button>
   </div>
   <div class="container-text">
-    <p>Habitaciones disponibles</p>
+    <p>{textoHabitacionesDisponibles}</p>
   </div>
   <div class="container-data">
     {#each habitaciones as habitacion (habitacion.id)}

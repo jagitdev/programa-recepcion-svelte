@@ -1,6 +1,9 @@
 <script lang="ts">
   import { datosHabitacion } from "$lib/components/stores/store";
   let datos = $datosHabitacion;
+
+  let buttonText = "Check-out";
+
   async function actualizarHabitacionId(datoss: any) {
     try {
       // Construye la URL para la creación de una nueva habitación
@@ -61,6 +64,7 @@
   function actulizarHabitacionBorrarClientes(datos: any) {
     actualizarHabitacionId($datosHabitacion);
     eliminarClientes($datosHabitacion.numHabitacion);
+    buttonText = "Check-out listo...";
   }
 
   let clientes: any = [];
@@ -89,7 +93,7 @@
   <div class="container-header">
     <p>Número Habitación: {datos.numHabitacion}</p>
     <button on:click={() => actulizarHabitacionBorrarClientes(datos)}>
-      eliminar clientes
+      {buttonText}
     </button>
   </div>
   <div class="container-clients">
