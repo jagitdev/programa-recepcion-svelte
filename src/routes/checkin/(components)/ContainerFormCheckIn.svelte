@@ -9,6 +9,8 @@
   import OneDiv from "$lib/components/structure/div/OneDiv.svelte";
   import TwoDiv from "$lib/components/structure/div/TwoDiv.svelte";
 
+  let textoBotonBorrarReserva = "Borrar Reserva";
+
   // llamada para buscar la reserva ----------------------
   function buscarReservas(reservaData: any) {
     let reserva: any;
@@ -109,6 +111,38 @@
   }
 
   //----------------------------------------------------------
+
+  function borrarReserva() {
+    let reservaID = $datosReserva.id;
+
+    async function eliminarReservas(idReserva: any) {
+      try {
+        const URL = `http://localhost:8080/api/v1/reservas/eliminar/${idReserva}`;
+
+        const response = await fetch(URL, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          // Si la respuesta es exitosa, puedes procesar la respuesta si es necesario
+          const data = await response.json();
+          console.log("Reserva eliminados exitosamente:", data);
+        } else {
+          // Si la respuesta no es exitosa, muestra un mensaje de error
+          console.error("Error al eliminar las reserva:", response.status);
+        }
+      } catch (error) {
+        console.error("Error de red a eliminar la reserva:", error);
+      }
+    }
+
+    eliminarReservas(reservaID);
+
+    textoBotonBorrarReserva = "Reserva Borrada...";
+  }
 </script>
 
 <OneDiv>
@@ -147,6 +181,8 @@
   />
 </OneDiv>
 <div class="one">
+  <SecondButton on:click={borrarReserva}>{textoBotonBorrarReserva}</SecondButton
+  >
   <SecondButton on:click={nuevoCliente}>Aceptar</SecondButton>
 </div>
 
@@ -154,5 +190,6 @@
   .one {
     display: flex;
     justify-content: right;
+    gap: 1%;
   }
 </style>

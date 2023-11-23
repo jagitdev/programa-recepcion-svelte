@@ -1,5 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import PrimaryButton from "$lib/components/buttons/PrimaryButton.svelte";
+  import SecondButton from "$lib/components/buttons/SecondButton.svelte";
   import { datosReserva, idHabitacion } from "$lib/components/stores/store";
   import { onMount } from "svelte";
 
