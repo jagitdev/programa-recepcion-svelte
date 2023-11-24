@@ -10,6 +10,7 @@
   import TwoDiv from "$lib/components/structure/div/TwoDiv.svelte";
 
   let textoBotonBorrarReserva = "Borrar Reserva";
+  let textoError = "";
 
   // llamada para buscar la reserva ----------------------
   function buscarReservas(reservaData: any) {
@@ -93,21 +94,35 @@
       fechaFinalizacion: $datosReserva.fechaFinalizacion,
     };
 
-    createCliente.nombre = "";
-    createCliente.apellidoUno = "";
-    createCliente.apellidoDos = "";
-    createCliente.dni = "";
-    createCliente.telefono = "";
-    createCliente.correoElectronico = "";
-    createCliente.direccion = "";
+    if (
+      createCliente.nombre === "" ||
+      createCliente.apellidoUno === "" ||
+      createCliente.apellidoDos === "" ||
+      createCliente.dni === "" ||
+      createCliente.telefono === "" ||
+      createCliente.correoElectronico === "" ||
+      createCliente.direccion === ""
+    ) {
+      textoError = "Faltan  campos";
+    } else {
+      createCliente.nombre = "";
+      createCliente.apellidoUno = "";
+      createCliente.apellidoDos = "";
+      createCliente.dni = "";
+      createCliente.telefono = "";
+      createCliente.correoElectronico = "";
+      createCliente.direccion = "";
 
-    console.log(newClient);
+      console.log(newClient);
 
-    listClientsCheckIn.update(
-      (clients: any) => (clients = [...clients, newClient])
-    );
+      listClientsCheckIn.update(
+        (clients: any) => (clients = [...clients, newClient])
+      );
 
-    console.log($listClientsCheckIn);
+      console.log($listClientsCheckIn);
+
+      textoError = "";
+    }
   }
 
   //----------------------------------------------------------
@@ -181,8 +196,10 @@
   />
 </OneDiv>
 <div class="one">
-  <SecondButton on:click={borrarReserva}>{textoBotonBorrarReserva}</SecondButton
-  >
+  <p>{textoError}</p>
+  <SecondButton on:click={borrarReserva}>
+    {textoBotonBorrarReserva}
+  </SecondButton>
   <SecondButton on:click={nuevoCliente}>Aceptar</SecondButton>
 </div>
 
@@ -190,6 +207,11 @@
   .one {
     display: flex;
     justify-content: right;
-    gap: 1%;
+    align-items: center;
+    gap: 3%;
+
+    p {
+      color: rgb(145, 8, 8);
+    }
   }
 </style>

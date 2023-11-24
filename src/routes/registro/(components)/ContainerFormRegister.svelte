@@ -10,6 +10,8 @@
   import OneDiv from "$lib/components/structure/div/OneDiv.svelte";
   import TwoDiv from "$lib/components/structure/div/TwoDiv.svelte";
 
+  let textoError = "";
+
   type typeCreateClient = {
     nombre: string;
     apellidoUno: string;
@@ -73,38 +75,52 @@
       fechaFinalizacion: createCliente.fechaFinalizacion,
     };
 
-    createCliente.nombre = "";
-    createCliente.apellidoUno = "";
-    createCliente.apellidoDos = "";
-    createCliente.dni = "";
-    createCliente.telefono = "";
-    createCliente.correoElectronico = "";
-    createCliente.direccion = "";
-
-    listClients.update((clients: any) => (clients = [...clients, newClient]));
-
-    console.log(newClient);
-    console.log("metodo aceptar " + selectedValuesMascota);
-
-    //saber si permite mascota o no permite mascota
-
-    if (selectedValuesMascota == "Permite Mascota") {
-      valueMascota.update((n: any) => (n = 1));
+    if (
+      createCliente.nombre === "" ||
+      createCliente.apellidoUno === "" ||
+      createCliente.apellidoDos === "" ||
+      createCliente.dni === "" ||
+      createCliente.telefono === "" ||
+      createCliente.correoElectronico === "" ||
+      createCliente.direccion === ""
+    ) {
+      textoError = "Faltan  campos";
     } else {
-      valueMascota.update((n: any) => (n = 0));
+      createCliente.nombre = "";
+      createCliente.apellidoUno = "";
+      createCliente.apellidoDos = "";
+      createCliente.dni = "";
+      createCliente.telefono = "";
+      createCliente.correoElectronico = "";
+      createCliente.direccion = "";
+
+      listClients.update((clients: any) => (clients = [...clients, newClient]));
+
+      console.log(newClient);
+      console.log("metodo aceptar " + selectedValuesMascota);
+
+      //saber si permite mascota o no permite mascota
+
+      if (selectedValuesMascota == "Permite Mascota") {
+        valueMascota.update((n: any) => (n = 1));
+      } else {
+        valueMascota.update((n: any) => (n = 0));
+      }
+
+      console.log("$value Mascota " + $valueMascota);
+
+      //saber si permite fumador o no permite fumador
+
+      if (selectedValuesFumador == "Permite Fumador") {
+        valueFumador.update((n: any) => (n = 1));
+      } else {
+        valueFumador.update((n: any) => (n = 0));
+      }
+
+      console.log("$value Fumador " + $valueFumador);
+
+      textoError = "";
     }
-
-    console.log("$value Mascota " + $valueMascota);
-
-    //saber si permite fumador o no permite fumador
-
-    if (selectedValuesFumador == "Permite Fumador") {
-      valueFumador.update((n: any) => (n = 1));
-    } else {
-      valueFumador.update((n: any) => (n = 0));
-    }
-
-    console.log("$value Fumador " + $valueFumador);
   }
 </script>
 
@@ -172,6 +188,7 @@
   {/if}
 
   <div class="one">
+    <p>{textoError}</p>
     <SecondButton on:click={newCreateClient}>Aceptar</SecondButton>
   </div>
 </form>
@@ -180,5 +197,11 @@
   .one {
     display: flex;
     justify-content: right;
+    align-items: center;
+    gap: 15%;
+
+    p {
+      color: rgb(145, 8, 8);
+    }
   }
 </style>
