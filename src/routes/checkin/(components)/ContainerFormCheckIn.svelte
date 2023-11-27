@@ -82,6 +82,11 @@
   //llamada para crear el cliente ---------------------------
 
   function nuevoCliente() {
+    function isValidPhoneNumberFormat(phoneNumber: any) {
+      const regex = /^\d{3}-\d{3}-\d{3}$/;
+      return regex.test(phoneNumber);
+    }
+
     let newClient: typeCreateClient = {
       nombre: createCliente.nombre,
       apellidoUno: createCliente.apellidoUno,
@@ -100,10 +105,11 @@
       createCliente.apellidoDos === "" ||
       createCliente.dni === "" ||
       createCliente.telefono === "" ||
+      !isValidPhoneNumberFormat(createCliente.telefono) ||
       createCliente.correoElectronico === "" ||
       createCliente.direccion === ""
     ) {
-      textoError = "Faltan  campos";
+      textoError = "Faltan campos o el formato de teléfono no es correcto";
     } else {
       createCliente.nombre = "";
       createCliente.apellidoUno = "";
@@ -179,7 +185,7 @@
   <PrimaryInput slot="one" placeholder={"Dni"} bind:value={createCliente.dni} />
   <PrimaryInput
     slot="two"
-    placeholder={"Teléfono"}
+    placeholder={"Teléfono (nnn-nnn-nnn)"}
     bind:value={createCliente.telefono}
   />
 </TwoDiv>

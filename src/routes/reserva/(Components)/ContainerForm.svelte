@@ -52,6 +52,11 @@
   }
 
   function newCreateClient() {
+    function isValidDateFormat(dateString: any) {
+      const regex = /^\d{4}-\d{2}-\d{2}$/;
+      return regex.test(dateString);
+    }
+
     let newClient: typeCreateClientReserva = {
       nombre: createCliente.nombre,
       apellidoUno: createCliente.apellidoUno,
@@ -65,9 +70,11 @@
       createCliente.nombre == "" ||
       createCliente.apellidoUno == "" ||
       createCliente.apellidoDos == "" ||
-      createCliente.dni == ""
+      createCliente.dni == "" ||
+      !isValidDateFormat(createCliente.fechaLlegada) ||
+      !isValidDateFormat(createCliente.fechaFinalizacion)
     ) {
-      textoError = "Faltan campos";
+      textoError = "Faltan campos el formato de fecha no es correcto";
     } else {
       createCliente.nombre = "";
       createCliente.apellidoUno = "";
